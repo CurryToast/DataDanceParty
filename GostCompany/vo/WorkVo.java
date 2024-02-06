@@ -25,7 +25,7 @@ public class WorkVo {
 
     @Override
     public String toString() {
-        return "WorkVo [work_id=" + work_id + ", work_type=" + work_type + ", work_time=" + work_time + "]";
+        return String.format("%s %s %d", this.work_id, this.work_type, this.work_time);
     }
 
     @Override

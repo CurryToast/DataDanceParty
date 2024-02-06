@@ -28,6 +28,7 @@ public class WorkDao extends BaseDao {
                 ));
             }
         } catch (SQLException e) {
+            System.out.println("Work_id로 select 실패 : " + e.getMessage());
         }
 
         return list;
@@ -51,6 +52,7 @@ public class WorkDao extends BaseDao {
                 ));
             }
         } catch (SQLException e) {
+            System.out.println("Work_type으로 select 실패 : " + e.getMessage());
         }
 
         return list;
@@ -81,6 +83,7 @@ public class WorkDao extends BaseDao {
                 ));
             }
         } catch (SQLException e) {
+            System.out.println("Work_time으로 select 실패 : " + e.getMessage());
         }
 
         return list;

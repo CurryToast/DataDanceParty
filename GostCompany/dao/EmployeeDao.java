@@ -49,12 +49,13 @@ public class EmployeeDao extends BaseDao {
             ps.setString(1, em_name);
             ResultSet rs= ps.executeQuery();
 
-                while(rs.next()){
-                    list.add(new EmployeeVo(em_name, 
-                                            rs.getString("em_position"), 
-                                            rs.getString("em_id"), 
-                                            rs.getDate("em_join_date")));       
-                }
+            while(rs.next()){
+                list.add(new EmployeeVo(
+                    rs.getString("em_id"),
+                    em_name, 
+                    rs.getString("em_position"), 
+                    rs.getDate("em_join_date")));
+            }
         } catch (SQLException e) {
             System.out.println(" select문 실행 예외 발생 : " + e.getMessage());
         }
@@ -76,9 +77,9 @@ public class EmployeeDao extends BaseDao {
             ResultSet rs= ps.executeQuery();
 
                 while(rs.next()){
-                    list.add(new EmployeeVo(rs.getString("em_name"), 
-                                            em_positon, 
-                                            rs.getString("em_id"),
+                    list.add(new EmployeeVo(rs.getString("em_id"),
+                                            rs.getString("em_name"), 
+                                            em_positon,
                                             rs.getDate("em_join_date")));       
                 }
         } catch (SQLException e) {
@@ -87,12 +88,6 @@ public class EmployeeDao extends BaseDao {
 
         return list;
     } 
-
-
-
-
-
-
 
 
     //사원 등록1 (아이디,이름,직급,입사날짜)

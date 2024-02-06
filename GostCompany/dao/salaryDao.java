@@ -135,7 +135,6 @@ public class salaryDao extends BaseDao {
             PreparedStatement pstmt = connection.prepareStatement(sql);
         ){
             pstmt.setString(1, work_id);
-      
             pstmt.executeUpdate();
 
         } catch (SQLException e) {

@@ -1,12 +1,14 @@
 package GostCompany.vo;
 
+import java.sql.Date;
+
 public class SalaryVo {
     private String sl_id;
     private String sl_position;
     private int sl_commition;
-    private String sl_date;
+    private Date sl_date;
 
-    public SalaryVo(String sl_id, String sl_position, int sl_commition, String sl_date) {
+    public SalaryVo(String sl_id, String sl_position, int sl_commition, Date sl_date) {
         this.sl_id = sl_id;
         this.sl_position = sl_position;
         this.sl_commition = sl_commition;
@@ -25,7 +27,7 @@ public class SalaryVo {
         return sl_commition;
     }
 
-    public String getSl_date() {
+    public Date getSl_date() {
         return sl_date;
     }
 

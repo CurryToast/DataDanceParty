@@ -3,11 +3,96 @@ package GostCompany.dao;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import GostCompany.vo.EmployeeVo;
 
 
 public class EmployeeDao extends BaseDao {
     
+    //Employee 테이블 select문 by id
+    public List<EmployeeVo> selectMyEmployeeDataByEm_id(String em_id){
+        List<EmployeeVo> list = new ArrayList<>();
+        String sql="SELECT * FROM TBL_EMPLOYEE te WHERE EM_ID =?";
+        try (
+                Connection conn = this.getConnection();
+                PreparedStatement ps = conn.prepareStatement(sql);
+
+        ) {
+            ps.setString(1, em_id);
+            ResultSet rs= ps.executeQuery();
+
+                while(rs.next()){
+                    list.add(new EmployeeVo(rs.getString("em_name"), 
+                                            rs.getString("em_position"), 
+                                            em_id,
+                                            rs.getDate("em_join_date")));       
+                }
+        } catch (SQLException e) {
+            System.out.println(" select문 실행 예외 발생 : " + e.getMessage());
+        }
+
+        return list;
+    } 
+        //Employee 테이블 select문 by name
+    public List<EmployeeVo> selectMyEmJoinDataByEm_name(String em_name){
+        List<EmployeeVo> list = new ArrayList<>();
+        String sql="SELECT * FROM TBL_EMPLOYEE te WHERE Em_name =?";
+        try (
+                Connection conn = this.getConnection();
+                PreparedStatement ps = conn.prepareStatement(sql);
+
+        ) {
+            ps.setString(1, em_name);
+            ResultSet rs= ps.executeQuery();
+
+                while(rs.next()){
+                    list.add(new EmployeeVo(em_name, 
+                                            rs.getString("em_position"), 
+                                            rs.getString("em_id"), 
+                                            rs.getDate("em_join_date")));       
+                }
+        } catch (SQLException e) {
+            System.out.println(" select문 실행 예외 발생 : " + e.getMessage());
+        }
+
+        return list;
+    } 
+
+
+    //Employee 테이블 select문 by position
+    public List<EmployeeVo> selectMyEmJoinDataByEm_position(String em_positon){
+        List<EmployeeVo> list = new ArrayList<>();
+        String sql="SELECT * FROM TBL_EMPLOYEE te WHERE EM_ID =?";
+        try (
+                Connection conn = this.getConnection();
+                PreparedStatement ps = conn.prepareStatement(sql);
+
+        ) {
+            ps.setString(1, em_positon);
+            ResultSet rs= ps.executeQuery();
+
+                while(rs.next()){
+                    list.add(new EmployeeVo(rs.getString("em_name"), 
+                                            em_positon, 
+                                            rs.getString("em_id"),
+                                            rs.getDate("em_join_date")));       
+                }
+        } catch (SQLException e) {
+            System.out.println(" select문 실행 예외 발생 : " + e.getMessage());
+        }
+
+        return list;
+    } 
+
+
+
+
+
+
 
 
     //사원 등록1 (아이디,이름,직급,입사날짜)

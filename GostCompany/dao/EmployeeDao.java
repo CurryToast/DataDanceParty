@@ -3,11 +3,8 @@ package GostCompany.dao;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
-import java.sql.SQLClientInfoException;
 import java.sql.SQLException;
-// import java.util.Date;
 
-import GostCompany.vo.EmployeeVo;
 
 public class EmployeeDao extends BaseDao {
     

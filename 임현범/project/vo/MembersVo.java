@@ -1,8 +1,8 @@
 package project.vo;
 
 public class MembersVo {
-    public static String MEMBERS_TITLE = String.format("%5s %s %10s %20s %10s",
-        "고객코드", "이름", "이메일", "전화번호", "나이"
+    public static String MEMBERS_TITLE = String.format("%5s %s %10s %20s %10s %4s",
+        "고객코드", "이름", "이메일", "전화번호", "나이", "등급"
     );
 
     private String code;
@@ -10,6 +10,7 @@ public class MembersVo {
     private String email;
     private String phoneNumber;
     private int age;
+    private String rank;
 
     public MembersVo(String code, String name, String email, String phoneNumber) {
         this.code = code;
@@ -24,6 +25,15 @@ public class MembersVo {
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.age = age;
+    }
+
+    public MembersVo(String code, String name, String email, String phoneNumber, int age, String rank) {
+        this.code = code;
+        this.name = name;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.age = age;
+        this.rank = rank;
     }
 
     public String getCode() {
@@ -46,11 +56,15 @@ public class MembersVo {
         return age;
     }
 
+    public String getRank() {
+        return rank;
+    }
+
 
     @Override
     public String toString() {
-        return String.format("%8s %3s %20s %20s %6d",
-            code, name, email, phoneNumber, age
+        return String.format("%8s %3s %20s %20s %7d %6s",
+            code, name, email, phoneNumber, age, rank
         );
     }
 

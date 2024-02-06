@@ -54,7 +54,21 @@ public class TblMembersDao extends TeamDao {
     }
 
     public MembersVo selectMyInfo(String customerId) {
-        String sql = "SELECT * FROM TBL_MEMBERS WHERE CODE = ?";
+        String sql = "SELECT tm.*, tbm.total,\r\n" + //
+                "   CASE \r\n" + //
+                "     WHEN tbm.total BETWEEN 1 AND 10 THEN '일반'\r\n" + //
+                "     WHEN tbm.total BETWEEN 11 AND 20 THEN '우수'\r\n" + //
+                "     WHEN tbm.total > 20 THEN 'VIP'\r\n" + //
+                "     ELSE '기타'\r\n" + //
+                "   END AS MEMBERSHIP\r\n" + //
+                "FROM TBL_MEMBERS tm\r\n" + //
+                "JOIN (\r\n" + //
+                "   SELECT CUSTOMER_ID, sum(MENU_QUANTITY) total\r\n" + //
+                "   FROM TBL_BUY_MENU\r\n" + //
+                "   WHERE to_char(BUY_DATE, 'yyyy') = to_char(SYSDATE, 'yyyy')\r\n" + //
+                "   GROUP BY CUSTOMER_ID\r\n" + //
+                ") tbm ON tbm.CUSTOMER_ID = tm.CODE\r\n" + //
+                "WHERE tm.CODE = ?";
         MembersVo vo = null;
 
         try (
@@ -69,7 +83,8 @@ public class TblMembersDao extends TeamDao {
                 rs.getString("NAME"),
                 rs.getString("EMAIL"),
                 rs.getString("PHONE_NUMBER"),
-                rs.getInt("AGE")
+                rs.getInt("AGE"),
+                rs.getString("MEMBERSHIP")
             );
         } catch (SQLException e) {
             System.out.println("개인정보 조회 실패 : " + e.getMessage());
